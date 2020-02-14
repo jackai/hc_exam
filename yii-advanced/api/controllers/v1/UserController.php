@@ -13,7 +13,7 @@ class UserController extends ApiController
     public function actionCreate()
     {
         $model = new SignupForm();
-        if ($model->load(Yii::$app->request->post()) && $model->signup()) {
+        if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->signup()) {
             return $this->response(self::SUCCESS, ["IsOK" => true]);
         }
 
@@ -23,7 +23,7 @@ class UserController extends ApiController
     public function actionDelete()
     {
         $model = new DeleteForm();
-        if ($model->load(Yii::$app->request->post()) && $model->delete()) {
+        if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->delete()) {
             return $this->response(self::SUCCESS, ["IsOK" => true]);
         }
 
@@ -33,7 +33,7 @@ class UserController extends ApiController
     public function actionPwdChange()
     {
         $model = new PwdChangeForm();
-        if ($model->load(Yii::$app->request->post()) && $model->change()) {
+        if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->change()) {
             return $this->response(self::SUCCESS, ["IsOK" => true]);
         }
 
@@ -43,7 +43,7 @@ class UserController extends ApiController
     public function actionLogin()
     {
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+        if ($model->load(Yii::$app->request->get()) && $model->validate() && $model->login()) {
             return $this->response(self::SUCCESS);
         }
 

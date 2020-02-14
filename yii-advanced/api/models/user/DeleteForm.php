@@ -1,11 +1,12 @@
 <?php
 namespace api\models\user;
 
+use api\models\ApiForm;
 use Yii;
 use yii\base\Model;
 use common\models\User;
 
-class DeleteForm extends Model
+class DeleteForm extends ApiForm
 {
     public $Account;
 

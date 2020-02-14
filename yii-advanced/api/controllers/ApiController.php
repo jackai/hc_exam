@@ -30,7 +30,7 @@ class ApiController extends Controller
         return [
             'Code' => $code,
             'Result' => $data,
-            'Message' => $message,
+            'Message' => $message ? $message : "",
         ];
     }
 

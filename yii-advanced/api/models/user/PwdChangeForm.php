@@ -1,11 +1,12 @@
 <?php
 namespace api\models\user;
 
+use api\models\ApiForm;
 use Yii;
 use yii\base\Model;
 use common\models\User;
 
-class PwdChangeForm extends Model
+class PwdChangeForm extends ApiForm
 {
     public $Account;
     public $Password;
@@ -30,6 +31,5 @@ class PwdChangeForm extends Model
 
         $user->setPassword($this->Password);
         return $user->save();
-
     }
 }

@@ -1,11 +1,12 @@
 <?php
 namespace api\models\user;
 
+use api\models\ApiForm;
 use Yii;
 use yii\base\Model;
 use common\models\User;
 
-class SignupForm extends Model
+class SignupForm extends ApiForm
 {
     public $Account;
     public $Password;
@@ -18,7 +19,7 @@ class SignupForm extends Model
         return [
             [['Account', 'Password',], 'trim'],
             [['Account', 'Password',], 'required'],
-            ['Account', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
+            ['Account', 'unique', 'targetAttribute' => 'username', 'targetClass' => '\common\models\User', 'message' => '用戶名稱已存在'],
             ['Account', 'string', 'min' => 2, 'max' => 50],
             ['Password', 'string', 'min' => 6],
         ];
@@ -34,6 +35,7 @@ class SignupForm extends Model
         $user = new User();
         $user->username = $this->Account;
         $user->setPassword($this->Password);
+        $user->status = User::STATUS_ACTIVE;
         return $user->save();
 
     }
