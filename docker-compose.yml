@@ -1,0 +1,35 @@
+version: '3'
+services:
+  api:
+    build: ./Docker/php73
+    volumes:
+       - "./yii-advanced:/var/www"
+       - "./api.conf:/etc/nginx/conf.d/default.conf"
+    ports:
+      - "80:80"
+    networks:
+      - "backend"
+
+  mysql:
+    image: mysql
+    volumes:
+      - ./db/mysql:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: exam
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    networks:
+      - "backend"
+
+  adminer:
+    build: ./Docker/adminer/
+    restart: always
+    ports:
+      - "8080:8080"
+    networks:
+      - "backend"
+
+networks:
+  backend:
